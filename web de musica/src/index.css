@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 32 23% 10%;
+    --foreground: 32 23% 95%;
+    
+    --card: 32 23% 15%;
+    --card-foreground: 32 23% 95%;
+    
+    --popover: 32 23% 15%;
+    --popover-foreground: 32 23% 95%;
+    
+    --primary: 32 100% 50%;
+    --primary-foreground: 32 23% 10%;
+    
+    --secondary: 32 23% 20%;
+    --secondary-foreground: 32 23% 95%;
+    
+    --muted: 32 23% 20%;
+    --muted-foreground: 32 23% 70%;
+    
+    --accent: 32 100% 40%;
+    --accent-foreground: 32 23% 95%;
+    
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 32 23% 95%;
+    
+    --border: 32 23% 30%;
+    --input: 32 23% 30%;
+    --ring: 32 100% 50%;
+    
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    background-image: url('https://images.unsplash.com/photo-1553949345-eb786bb3f7ba?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-color: rgba(20, 15, 10, 0.85);
+    z-index: -1;
+  }
+}
+
+/* ✅ Eliminar la apariencia predeterminada de los inputs tipo search */
+input[type="search"] {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+/* ✅ Definimos una variable para las imágenes de fondo */
+:root {
+  --scroll-bg: url('https://images.unsplash.com/photo-1581345628965-9a5d438b4e5f?q=80&w=1974&auto=format&fit=crop');
+}
+
+.scroll-bg {
+  background: var(--scroll-bg) center/cover no-repeat;
+  position: relative;
+}
+
+.scroll-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 250, 240, 0.9);
+  z-index: -1;
+}
+
+.scroll-edge-top, .scroll-edge-bottom {
+  height: 30px;
+  background: var(--scroll-bg) top/cover no-repeat;
+  border-radius: 5px;
+  position: relative;
+}
+
+.book-cover {
+  background: var(--scroll-bg) center/cover no-repeat;
+  @apply shadow-xl relative;
+}
+
+.book-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(20, 15, 10, 0.4);
+  z-index: 0;
+}
+
+.book-spine {
+  background: var(--scroll-bg) left/cover no-repeat;
+  box-shadow: inset -5px 0 10px rgba(0, 0, 0, 0.5);
+}
+
+@layer components {
+  /* ✅ Efecto de desplazamiento en tarjetas */
+  .video-card {
+    @apply transition-all duration-300;
+  }
+  
+  .video-card:hover {
+    @apply -translate-y-1 shadow-2xl;
+  }
+  
+  /* ✅ Efecto en tabs de categorías */
+  .category-tab {
+    @apply relative transition-all duration-300;
+  }
+  
+  .category-tab::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: hsl(var(--primary));
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  .category-tab:hover::after,
+  .category-tab[data-state="active"]::after {
+    width: 80%;
+  }
+  
+  /* ✅ Optimización del reproductor */
+  .music-player-container {
+    background: var(--scroll-bg) center/cover no-repeat;
+    position: relative;
+  }
+  
+  .music-player-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(20, 15, 10, 0.7);
+    z-index: 0;
+  }
+  
+  /* ✅ Scroll de letras de canciones */
+  .lyrics-scroll {
+    max-height: 300px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary)) hsl(var(--secondary));
+  }
+  
+  .lyrics-scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .lyrics-scroll::-webkit-scrollbar-track {
+    background: hsl(var(--secondary));
+  }
+  
+  .lyrics-scroll::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--primary));
+    border-radius: 20px;
+  }
+}
